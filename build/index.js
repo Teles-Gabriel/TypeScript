@@ -113,3 +113,44 @@ class Pessoa {
 }
 const p = new Pessoa(1, "Gabriel");
 console.log(p.sayHello());
+/*
+data modifiers
+public
+private
+protected
+*/
+// data modifiers também são aplicáveis em métodos
+// classes
+class Character {
+    constructor(name, stregth, skill) {
+        this.name = name;
+        this.strength = stregth;
+        this.skill = skill;
+    }
+    attack() {
+        console.log(`Attack with ${this.strength} points`);
+    }
+}
+// essa é uma subclasse pq herda da classe pai Character/ super class, magician é child/filha
+class Magician extends Character {
+    constructor(name, strenght, skill, magicPoints) {
+        super(name, strenght, skill);
+        this.magicPoints = magicPoints;
+        this.name = name;
+    }
+}
+const p1 = new Character("Gabriel", 10, 98);
+p1.attack();
+const p2 = new Magician("Gabriel", 9, 30, 100);
+//generics
+/*
+uma função que junte vários arrays em um só
+... operador spread(...)
+*/
+function concatArray(...itens) {
+    return new Array().concat(...itens);
+}
+const numArray = concatArray([1, 5], [3]);
+const stgArray = concatArray(["Gabriel", "Eu mesmo"], ["teste"]);
+console.log(numArray);
+console.log(stgArray);

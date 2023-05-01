@@ -159,3 +159,72 @@ class Pessoa implements robot2{
 
 const p = new Pessoa(1,"Gabriel");
 console.log(p.sayHello());
+
+/*
+data modifiers 
+public
+private
+protected
+*/
+// data modifiers também são aplicáveis em métodos
+
+
+// classes
+
+class Character {
+    protected name?: string; //usando o private a unica maneira de acessar a propriedade é pelo método construtor
+    //usando public é possivel acessar novamente do lado de fora o mesmo que não passar nada
+    //o protected só permite que classes e subclasses que herdam dele possam acessar
+    strength: number;
+    skill: number;
+
+    constructor(name:string, stregth:number, skill:number){
+        this.name = name;
+        this.strength = stregth;
+        this.skill = skill;
+        
+    }
+
+    public attack():void{
+        console.log(`Attack with ${this.strength} points`);
+
+    }
+}
+// essa é uma subclasse pq herda da classe pai Character/ super class, magician é child/filha
+class Magician extends Character {
+    magicPoints:number;
+    constructor(name:string,
+        strenght:number,
+         skill:number,
+         magicPoints:number
+         ){
+        super(name, strenght, skill);
+        this.magicPoints = magicPoints;
+        this.name = name;
+    }
+}
+
+const p1 = new Character("Gabriel",10, 98);
+p1.attack();
+
+const p2 = new Magician("Gabriel", 9, 30, 100);
+
+
+//generics
+/*
+uma função que junte vários arrays em um só
+... operador spread(...)
+*/
+
+function concatArray<T>(...itens: T[]):T[]{
+    return new Array().concat(...itens);
+}
+/*
+usando as <T> eu posso delimitar o tipo do array usando o generic
+const numArray = concatArray**<number[]>**([1, 5],[3]);
+*/
+const numArray = concatArray<number[]>([1, 5],[3]);
+const stgArray = concatArray<string[]>(["Gabriel","Eu mesmo"],["teste"])
+console.log(numArray);
+console.log(stgArray);
+

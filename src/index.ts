@@ -117,3 +117,45 @@ async function getDataBase(id: number): Promise<string>{ //Sempre quue eu   tive
     return "Gabriel"
 }
 
+//interfaces (type x interface)
+
+//type é mais usado para tipar um conjunto de objetos e interface é usado pra trabalhar com classe
+// interface é um contrato que quem herdar precisa seguir 
+type robot = {
+    readonly id: number|string; //readonly é uma propriedade para permitir somente a leitura 
+    name: string;
+};
+
+interface robot2 {
+    id:number|string;
+    name:string;
+    sayHello():string;
+}
+
+const bot2: robot = {
+    id: 1,
+    name: "magaman",
+}
+
+const bot: robot = {
+    id: 1,
+    name: "magaman",
+}
+
+class Pessoa implements robot2{
+    id: number|string;
+    name: string;
+
+    constructor(id:string|number, name:string){
+        this.id = id
+        this.name = name
+
+
+    }
+    sayHello(): string {
+        return `hello ${this.name}`;
+    }
+}
+
+const p = new Pessoa(1,"Gabriel");
+console.log(p.sayHello());

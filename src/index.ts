@@ -228,3 +228,29 @@ const stgArray = concatArray<string[]>(["Gabriel","Eu mesmo"],["teste"])
 console.log(numArray);
 console.log(stgArray);
 
+//Decorators
+function ExibirNome(target:any){
+    console.log(target);
+};
+
+@ExibirNome //@decorar o método
+
+class Funcionario{}
+
+@ExibirNome
+
+class Quincas{}
+
+//Decorators
+
+function apiVersion(version:string){
+    return (target:any) => {
+        Object.assign(target.prototype, {__version: version});
+    };
+}
+
+@apiVersion("1.10") // injeta um gatilho na classe, o decorator a nivel de classe
+class Api{}
+
+const api = new Api();
+console.log(api.__version);

@@ -242,15 +242,51 @@ class Funcionario{}
 class Quincas{}
 
 //Decorators
-
+/*
 function apiVersion(version:string){
     return (target:any) => {
         Object.assign(target.prototype, {__version: version});
     };
 }
 
-@apiVersion("1.10") // injeta um gatilho na classe, o decorator a nivel de classe
-class Api{}
+@apiVersion("1.10") */// injeta um gatilho na classe, o decorator a nivel de classe
 
-const api = new Api();
-console.log(api.__version);
+//atributee decorator
+
+/*
+    Ao criar o atributo decorator podemos fazer um controle do numero de caracteres que serão inseridos no nosso código,
+    um validador
+    é um declarador muito utilizado por frameworks que colocamos em cima de uma propriedade
+*/
+
+function minLength(length: number){
+    return (target:any, key:string) => {
+        let _value = target[key];
+//        console.log(key);
+        const getter = () => "[play]"+_value;
+        const setter = (value:string) => {
+            if(value.length < length){
+                throw new Error(`Tamanho menor do que${length}`);
+            } else {
+                _value = value;
+            }
+        };
+        Object.defineProperty(target, key, {
+            get: getter,
+            set: setter,
+        });
+    };
+}
+
+class Api{
+    @minLength(10)
+    name:string;
+
+    constructor(name:string){
+        this.name = name;
+    }
+}
+
+const api = new Api("usuaaaaaaarios");
+//console.log(api.name);
+console.log(api.name);
